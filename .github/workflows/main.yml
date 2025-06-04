@@ -1,0 +1,26 @@
+name: Create Plan File
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  create-plan:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Create plan file
+      run: |
+        PR_NUMBER=${{ github.event.pull_request.number || 'manual' }}
+        echo "Creating plan file for PR #$PR_NUMBER"
+        mkdir -p plans
+        echo "Plan for PR #$PR_NUMBER" > plans/plan_$PR_NUMBER.txt
+
+    - name: Archive plan file
+      uses: actions/upload-artifact@v3
+      with:
+        name: plan-files
+        path: plans/
