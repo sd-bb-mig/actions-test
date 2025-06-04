@@ -15,9 +15,12 @@ jobs:
     - name: Create plan file
       run: |
         PR_NUMBER=${{ github.event.pull_request.number || 'manual' }}
-        echo "Creating plan file for PR #$PR_NUMBER"
+        RUN_ID=${{ github.run_id }}
+        echo "Creating plan file for PR #$PR_NUMBER with Run ID #$RUN_ID"
         mkdir -p plans
-        echo "Plan for PR #$PR_NUMBER" > plans/plan_$PR_NUMBER.txt
+        echo "Plan for PR #$PR_NUMBER with Run ID #$RUN_ID" > plans/plan_${PR_NUMBER}_run_${RUN_ID}.txt
+
+
 
     - name: Archive plan file
       uses: actions/upload-artifact@v4
