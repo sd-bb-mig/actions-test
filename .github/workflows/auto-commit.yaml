@@ -31,8 +31,8 @@ jobs:
         run: |
           # Set the Git user name and email to attribute commits to the GitHub App
           # The email format is important for proper attribution on GitHub
-          git config user.name "your-github-app-name[bot]" # Replace 'your-github-app-name' with your app's actual name
-          git config user.email "${{ secrets.APP_ID }}+your-github-app-name[bot]@users.noreply.github.com" # Replace 'your-github-app-name'
+          git config user.name "sd-commit-push-app"
+          git config user.email "${{ secrets.APP_ID }}+sd-commit-push-app@users.noreply.github.com"
 
       - name: Make a sample change
         run: |
