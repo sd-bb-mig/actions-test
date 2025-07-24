@@ -34,24 +34,21 @@ jobs:
           TIMESTAMP=$(date +%Y-%m-%d_%H-%M-%S)
           git checkout -b $TIMESTAMP
 
-      - name: Make a sample change
+      - name: Do Simple Change Commit and Push changes
         run: |
+          # Check if there are any changes to commit
           # Create or update a file with the current timestamp
           TIMESTAMP=$(date +%Y-%m-%d_%H-%M-%S)
           echo "Last update at: $TIMESTAMP" > automated_update.txt
           echo "Adding another line for more changes." >> automated_update.txt
 
-      - name: Commit and Push changes
-        run: |
-          # Check if there are any changes to commit
           git add automated_update.txt
           git commit -m "Automated update by GitHub App: $TIMESTAMP"
-          
           
           # Push the changes using the generated installation token
           # We use the token from the previous step (steps.generate_token.outputs.token)
           # The 'x-oauth-basic' is a common placeholder for the username when using a token
-          git push https://x-oauth-basic:${{ steps.generate_token.outputs.token }}@github.com/${{ github.repository }} HEAD:main # Adjust 'main' to your target branch
+          git push https://x-oauth-basic:${{ steps.generate_token.outputs.token }}@github.com/${{ github.repository }} HEAD:$TIMESTAMP # Adjust 'main' to your target branch
         env:
           # Ensure the token is available as an environment variable for the git push command
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
