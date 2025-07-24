@@ -29,8 +29,6 @@ jobs:
 
       - name: Configure Git
         run: |
-          # Set the Git user name and email to attribute commits to the GitHub App
-          # The email format is important for proper attribution on GitHub
           git config user.name "sd-commit-push-app"
           git config user.email "${{ secrets.APP_ID }}+sd-commit-push-app@users.noreply.github.com"
 
@@ -38,7 +36,7 @@ jobs:
         run: |
           # Create or update a file with the current timestamp
           TIMESTAMP=$(date +%Y-%m-%d_%H-%M-%S)
-          echo "Last automated update: $TIMESTAMP" > automated_update.txt
+          echo "Last update at: $TIMESTAMP" > automated_update.txt
           echo "Adding another line for more changes." >> automated_update.txt
 
       - name: Commit and Push changes
