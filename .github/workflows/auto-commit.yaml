@@ -31,6 +31,8 @@ jobs:
         run: |
           git config user.name "sd-commit-push-app"
           git config user.email "${{ secrets.APP_ID }}+sd-commit-push-app@users.noreply.github.com"
+          TIMESTAMP=$(date +%Y-%m-%d_%H-%M-%S)
+          git checkout -b $TIMESTAMP
 
       - name: Make a sample change
         run: |
