@@ -44,8 +44,9 @@ jobs:
       - name: Commit and Push changes
         run: |
           # Check if there are any changes to commit
-          git diff --exit-code || git add .
-          git diff --cached --exit-code || git commit -m "Automated update by GitHub App: $TIMESTAMP"
+          git add automated_update.txt
+          git commit -m "Automated update by GitHub App: $TIMESTAMP"
+          
           
           # Push the changes using the generated installation token
           # We use the token from the previous step (steps.generate_token.outputs.token)
